@@ -10,7 +10,9 @@ iptables -A OUTPUT -m conntrack --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT
 
 iptables -t nat -A POSTROUTING -o ens160 -j MASQUERADE
 iptables -A FORWARD -i ens160 -j ACCEPT
-
+#open 80 443 port
+iptables -I INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+iptables -I INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 
 #DNS
 iptables -I INPUT -p udp -m udp --dport 53 -j ACCEPT 
